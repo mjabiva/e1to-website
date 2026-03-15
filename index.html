@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Each 1 Teach One Dance Series</title>
   <meta name="description" content="Free & donation-based dance workshops for the Bronx community. Relaunching March 22, 2026 at Lehman College." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -365,24 +365,105 @@
     }
 
     /* ── MOBILE ────────────────────────────────────────────── */
+    /* RSVP grid class */
+    .rsvp-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
     @media (max-width: 768px) {
+      /* NAV */
       nav { padding: 0 1.2rem; }
       .nav-links { display: none; }
       .nav-links.open {
         display: flex; flex-direction: column;
-        position: absolute; top: 62px; left: 0; right: 0;
-        background: rgba(10,10,10,0.97);
-        padding: 1.5rem 1.5rem; gap: 1.2rem;
-        border-bottom: 1px solid var(--mid);
+        position: fixed; top: 62px; left: 0; right: 0; bottom: 0;
+        background: rgba(10,10,10,0.98);
+        padding: 2rem 1.5rem; gap: 1.5rem;
+        overflow-y: auto;
+        z-index: 99;
       }
+      .nav-links.open a { font-size: 1.1rem; padding: 0.6rem 0; border-bottom: 1px solid var(--mid); }
+      .nav-links.open li:last-child a { border-bottom: none; }
       .nav-hamburger { display: flex; }
-      section { padding: 4rem 1.2rem; }
-      .mission-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .nav-cta { padding: 0.6rem 1.2rem !important; font-size: 0.85rem !important; }
+
+      /* SECTIONS */
+      section { padding: 3.5rem 1.2rem; }
+      #hero { padding: 5.5rem 1.2rem 3rem; min-height: auto; }
+      #donate { padding: 3.5rem 1.2rem; }
+      #rsvp { padding: 3.5rem 1.2rem !important; }
+
+      /* HERO */
+      .hero-bg-text { display: none; }
+      .hero-headline { font-size: clamp(40px, 13vw, 72px); }
+      .hero-sub { font-size: 0.95rem; }
+      .relaunch-block { flex-direction: column; gap: 1rem; align-items: flex-start; }
+      .relaunch-date { font-size: clamp(36px, 11vw, 60px); }
+      .hero-btns { flex-direction: column; gap: 0.8rem; }
+      .hero-btns .btn { width: 100%; justify-content: center; text-align: center; }
+
+      /* GRIDS → SINGLE COLUMN */
+      .mission-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
       .involved-grid { grid-template-columns: 1fr; gap: 3rem; }
       .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .community-grid { grid-template-columns: 1fr; }
-      footer { flex-direction: column; text-align: center; }
+      .community-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .rsvp-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+
+      /* STYLES GRID */
+      .styles-grid { grid-template-columns: repeat(2, 1fr); }
+
+      /* PROVERB */
+      .proverb-quote { font-size: clamp(36px, 10vw, 64px); }
+
+      /* MISSION PILLARS */
+      .mission-pillar { margin-bottom: 1.5rem !important; }
+
+      /* MEMORIAL CARD */
+      .memorial-card { margin-top: 1.5rem; }
+
+      /* MEDIA PLACEHOLDER */
+      .media-placeholder { aspect-ratio: 16/9; }
+
+      /* SCHEDULE */
+      .schedule-row { gap: 1rem; }
+
+      /* SPONSOR TIERS */
+      .tier { flex-direction: column; gap: 0.4rem; }
+      .tier-amount { min-width: unset; font-size: 1.2rem; }
+
+      /* RSVP CARD */
+      .rsvp-grid > div:last-child > div { padding: 1.5rem !important; }
+
+      /* SECTION TITLES */
+      .section-title { font-size: clamp(30px, 9vw, 52px); }
+
+      /* INVOLVE BLOCKS */
+      .involve-block .btn { width: 100%; justify-content: center; }
+
+      /* DONATE */
+      #donate .section-title { font-size: clamp(32px, 9vw, 56px); }
+      .donate-btn { width: 100%; justify-content: center; }
+
+      /* CONTACT */
+      #contact > .section-inner > .contact-grid > div:last-child > div {
+        padding: 1.5rem !important;
+      }
+      #contact .btn { width: 100%; justify-content: center; display: flex; }
+
+      /* FOOTER */
+      footer { flex-direction: column; text-align: center; gap: 0.6rem; }
+      footer p { font-size: 0.72rem; }
+    }
+
+    /* Extra small phones */
+    @media (max-width: 390px) {
+      .hero-headline { font-size: 38px; }
+      .styles-grid { grid-template-columns: 1fr; }
+      .relaunch-date { font-size: 34px; }
     }
   </style>
 </head>
@@ -546,7 +627,7 @@
 
   <!-- RSVP -->
   <section id="rsvp" style="background:var(--black);padding:5rem 2.5rem;border-top:1px solid var(--mid);">
-    <div class="section-inner" style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;">
+    <div class="section-inner rsvp-grid">
       <div class="reveal">
         <p class="section-label">Relaunch Event</p>
         <h2 class="section-title">March 22,<br><em style="color:var(--red);font-style:normal;">2026.</em></h2>
