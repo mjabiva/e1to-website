@@ -74,14 +74,45 @@
       padding: 7rem 2.5rem 4rem;
       position: relative; overflow: hidden;
     }
-    .hero-bg-text {
-      position: absolute; top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      font-family: var(--ff-display);
-      font-size: clamp(140px, 22vw, 340px);
-      color: rgba(255,255,255,0.025);
-      white-space: nowrap; pointer-events: none;
-      user-select: none; letter-spacing: -0.02em;
+    /* ── HERO SLIDESHOW ──────────────────────────────────────── */
+    .hero-slideshow {
+      position: absolute; inset: 0;
+      z-index: 0; overflow: hidden;
+    }
+    .hero-slideshow img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%);
+      opacity: 0;
+      animation: slideShow 50s linear infinite;
+    }
+    .hero-slideshow img:nth-child(1)  { animation-delay: 0s; }
+    .hero-slideshow img:nth-child(2)  { animation-delay: 5s; }
+    .hero-slideshow img:nth-child(3)  { animation-delay: 10s; }
+    .hero-slideshow img:nth-child(4)  { animation-delay: 15s; }
+    .hero-slideshow img:nth-child(5)  { animation-delay: 20s; }
+    .hero-slideshow img:nth-child(6)  { animation-delay: 25s; }
+    .hero-slideshow img:nth-child(7)  { animation-delay: 30s; }
+    .hero-slideshow img:nth-child(8)  { animation-delay: 35s; }
+    .hero-slideshow img:nth-child(9)  { animation-delay: 40s; }
+    .hero-slideshow img:nth-child(10) { animation-delay: 45s; }
+    @keyframes slideShow {
+      0%   { opacity: 0; }
+      3%   { opacity: 1; }
+      10%  { opacity: 1; }
+      13%  { opacity: 0; }
+      100% { opacity: 0; }
+    }
+    /* Dark overlay so text stays readable */
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: rgba(10,10,10,0.72);
+      z-index: 1;
+    }
+    /* Lift hero content above slideshow */
+    #hero > *:not(.hero-slideshow):not(.hero-overlay) {
+      position: relative; z-index: 2;
     }
     .hero-eyebrow {
       font-size: 0.75rem; letter-spacing: 0.22em; text-transform: uppercase;
@@ -397,7 +428,7 @@
       #rsvp { padding: 3.5rem 1.2rem !important; }
 
       /* HERO */
-      .hero-bg-text { display: none; }
+      .hero-overlay { background: rgba(10,10,10,0.82); }
       .hero-headline { font-size: clamp(40px, 13vw, 72px); }
       .hero-sub { font-size: 0.95rem; }
       .relaunch-block { flex-direction: column; gap: 1rem; align-items: flex-start; }
@@ -507,7 +538,20 @@
 
   <!-- HERO -->
   <section id="hero">
-    <div class="hero-bg-text">E1TO</div>
+    <!-- Background slideshow -->
+    <div class="hero-slideshow">
+      <img src="MEDIA/E1TO-WEBSITE_1.jpg" alt="" loading="eager" />
+      <img src="MEDIA/E1TO-WEBSITE_2.jpg" alt="" loading="lazy" />
+      <img src="MEDIA/E1TO-WEBSITE_3.jpg" alt="" loading="lazy" />
+      <img src="MEDIA/E1TO-WEBSITE_4.jpg" alt="" loading="lazy" />
+      <img src="MEDIA/E1TO-WEBSITE_5.jpg" alt="" loading="lazy" />
+      <img src="MEDIA/E1TO-WEBSITE_6.jpg" alt="" loading="lazy" />
+      <img src="MEDIA/E1TO-WEBSITE_7.jpg" alt="" loading="lazy" />
+      <img src="MEDIA/E1TO-WEBSITE_8.jpg" alt="" loading="lazy" />
+      <img src="MEDIA/E1TO-WEBSITE_9.jpg" alt="" loading="lazy" />
+      <img src="MEDIA/E1TO-WEBSITE_10.jpg" alt="" loading="lazy" />
+    </div>
+    <div class="hero-overlay"></div>
     <p class="hero-eyebrow">Relaunch · The Bronx · 2026</p>
     <h1 class="hero-headline">Each One.<br><em>Teach</em> One.</h1>
     <p class="hero-sub">Free &amp; donation-based dance workshops rooted in community, culture, and the Bronx. Open to all — ages 5 and up.</p>
@@ -588,9 +632,12 @@
           </div>
         </div>
         <div class="reveal">
-          <div class="media-placeholder">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-            <span>Add Photo / Video</span>
+          <div style="width:100%;aspect-ratio:4/5;overflow:hidden;">
+            <img
+              src="MEDIA/Maurice_C_Dean_Founder_2.jpg"
+              alt="Maurice C. Dean, Founder of Each 1 Teach One Dance Series"
+              style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"
+            />
           </div>
         </div>
       </div>
@@ -740,8 +787,17 @@
               </div>
             </div>
           </div>
-          <a href="mailto:e1tonedance@gmail.com?subject=Sponsorship Inquiry" class="btn btn-outline" style="margin-top:1.5rem;">Become a Sponsor</a>
+          <a href="/cdn-cgi/l/email-protection#b8dd89ccd7d6dddcd9d6dbddf8dfd5d9d1d496dbd7d587cbcddad2dddbcc85ebc8d7d6cbd7cacbd0d1c898f1d6c9cdd1cac1" class="btn btn-outline" style="margin-top:1.5rem;">Become a Sponsor</a>
         </div>
+      </div>
+
+      <!-- Volunteer CTA bar -->
+      <div style="margin-top:3rem;padding:2rem;background:var(--dark);border-left:3px solid var(--red);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;">
+        <div>
+          <p style="font-family:var(--ff-display);font-size:1.6rem;letter-spacing:0.05em;color:var(--off);margin-bottom:0.3rem;">Want to Volunteer?</p>
+          <p style="font-size:0.9rem;color:var(--gray);">No dance experience needed. Help with events, outreach, media, and more.</p>
+        </div>
+        <a href="volunteer.html" class="btn btn-primary">Sign Up to Volunteer</a>
       </div>
     </div>
   </section>
@@ -770,7 +826,7 @@
           <h2 class="section-title" style="font-size:clamp(32px,4vw,52px);margin-bottom:2rem;">Let's Connect.</h2>
           <div class="contact-item">
             <p class="contact-label">Email</p>
-            <p class="contact-value"><a href="mailto:e1tonedance@gmail.com">e1tonedance@gmail.com</a></p>
+            <p class="contact-value"><a href="/cdn-cgi/l/email-protection#711440051e1f1415101f121431161c10181d5f121e1c"><span class="__cf_email__" data-cfemail="8ce9bdf8e3e2e9e8ede2efe9ccebe1ede5e0a2efe3e1">[email&#160;protected]</span></a></p>
           </div>
           <div class="contact-item">
             <p class="contact-label">Follow Us</p>
@@ -822,7 +878,7 @@
     </div>
   </footer>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     // Nav toggle
     function toggleNav() {
       document.getElementById('navLinks').classList.toggle('open');
@@ -834,13 +890,4 @@
       });
     });
     // Scroll reveal
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('visible'); }
-      });
-    }, { threshold: 0.12 });
-    reveals.forEach(r => observer.observe(r));
-  </script>
-</body>
-</html>
+    const r
